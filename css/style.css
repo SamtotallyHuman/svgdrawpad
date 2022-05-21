@@ -1,0 +1,92 @@
+.no-border {
+    border: none;
+}
+nav
+{
+   position: fixed;
+   top: 0px;
+}
+body {
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: #222222;
+    touch-action: none;
+}
+.canvas {
+    background-color: #000000;
+    touch-action: none;
+    
+}
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.large-text {
+    font-size: 30px;
+}
+.bracket {
+    background-color: #000000;
+}
+.verticle-centre {
+    vertical-align: middle;
+}
+.displayDiv {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    touch-action: none;
+    scroll-behavior: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.createdObject{
+    touch-action: none;
+}
+.noScroll {
+    overflow: hidden;
+}
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 10px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+.lowHeight {
+    height: 10px;
+}
