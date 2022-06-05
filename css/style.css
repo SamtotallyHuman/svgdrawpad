@@ -90,3 +90,34 @@ body {
 .lowHeight {
     height: 10px;
 }
+.darkcolour {
+    background-color: #222222;
+    color: white;
+}
+.textWhite {
+    color: white;
+}
+.inputTextArea {
+    width: 100%;
+    resize: vertical;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: hidden;
+    background:#222222;
+    border-color: #000000;
+    color: white;
+}
+#displayTextArea {
+    width: 100%;
+    resize: vertical;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: hidden;
+}
+.greyText {
+    color: #a0a0a0;
+}
+.textObject {
+    white-space: normal;
+    overflow: auto;
+}

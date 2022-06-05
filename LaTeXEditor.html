@@ -1,0 +1,79 @@
+<html>
+    <head>
+
+        <title>LaTeX Editor</title>
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css"/> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.js"></script>
+
+        <style>
+
+            * {
+                caret-color: white !important;
+                border-color: white !important;
+                font-size: larger;
+            }
+
+            .input {
+                width : 100%;
+                color: white;
+            }
+
+            .output {
+                width : 100%;
+                height : 33%;
+                color: white;
+                border : 1px solid white;
+            }
+
+            .extraKeys {
+                width : 100%;
+                height : 100%;
+                color: white;
+                border : 1px solid white;
+            }
+
+            body {
+                height: 100%;
+                overflow-y: hidden;
+                overflow-x: hidden;
+                background-color: #222222;
+                touch-action: none;
+            }
+
+        </style>
+
+    </head>
+    <body style="background:black;">
+
+        <span class="input" id="my-math-input"></span>
+        <div class="output" id="latexDisplay" style=""></div>
+        </div>
+
+    </body>
+    <script>
+
+const mathFieldSpan = document.getElementById('my-math-input');
+const displayDiv = document.getElementById('latexDisplay');
+const extraKeysDiv = document.getElementById('extraKeys');
+
+var MQ = MathQuill.getInterface(2); // for backcompat
+var mathField = MQ.MathField(mathFieldSpan, {
+    spaceBehavesLikeTab: true, // configurable
+    handlers: {edit: function() {
+        displayDiv.innerHTML = "\\("+ mathField.latex() + "\\)";
+    }}
+});
+
+function setSize() {
+    let windowHeight = window.innerHeight;
+    // sets the height of each element in the ratio 3:1:2
+    mathFieldSpan.style.height = windowHeight*3/5 + "px";
+    displayDiv.style.height = windowHeight*2/5 + "px";
+}
+
+setSize();
+
+</script>
+</html>

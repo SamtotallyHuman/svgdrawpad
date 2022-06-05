@@ -66,6 +66,13 @@ function changePenWidth() {
     document.getElementById("changepenWidthbutton").innerHTML = pensize;
 }
 
+function changeLabelWidth() {
+    textSize = document.getElementById("textwidthRange").value;
+    document.getElementById("textSizeLabel").innerHTML = "&nbsp;"+ textSize+"&nbsp;";
+    displayTextDiv.style.fontSize  = textSize +"px";
+
+}
+
 function changePenFill() {
     if (fillShape) {
         fillShape = false;
@@ -85,6 +92,7 @@ function clearArea() {
 function changePenColour(colourInput) {
     colour=colourInput;
     document.getElementById('penColour').style.color = colour;
+    document.getElementById('outerDisplayDivHolder').style.color = colour;
 }
 
 function forceStop() {
@@ -117,6 +125,7 @@ function changePenAction(action) {
     } else if (penAction == "rectangle") {
         document.getElementById('penAction').innerHTML = '<span class="glyphicon glyphicon glyphicon-stop large" id="changepenbutton"></span>';
     } else if (penAction == "text") {
+        updateDisplayTextArea();
         document.getElementById('penAction').innerHTML = '<span class="glyphicon glyphicon-text-background large" id="changepenbutton"></span>'; 
         //alert("Text is not yet supported");       
     } else if (penAction == "moveNoResizer") {
