@@ -215,6 +215,7 @@ $(document).ready(function() {
     }, false);
     svg.addEventListener("touchend", function(e) {
         e.preventDefault();
+        findxy('up', e)
     }, false);
     // Enable scroll when pointer is not on the svg
     svg.addEventListener("pointerleave", function(e) {
