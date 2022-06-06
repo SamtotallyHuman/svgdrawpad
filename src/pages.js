@@ -31,7 +31,7 @@ function downloadPDF() {
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = "svgDrawPadImage" + ".pdf";
-      link.click();
+      window.open(link.href);
     });
     doc.end();
 }
