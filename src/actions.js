@@ -2,29 +2,45 @@ var CLIPBOARD = new CLIPBOARD_CLASS(true);
 
 function CLIPBOARD_CLASS(autoresize) {
     var _self = this;
+    clicktimer = null;
 
     //handlers
     document.addEventListener('paste', function(e) {
-        _self.paste_auto(e);
+       
+        var BLOCK_TIME = 500;
+        function handleclick() {
+            _self.paste_auto(e);
+        }
+        
+        if (clicktimer) {
+        } else {
+            handleclick();
+            clicktimer = setTimeout(function() {
+                clicktimer = null;
+            }, BLOCK_TIME);
+        }
+
+        
     }, false);
 
     //on paste
     this.paste_auto = function(e) {
         if (e.clipboardData) {
-        var items = e.clipboardData.items;
-        if (!items) return;
+            var items = e.clipboardData.items;
+            if (!items) return;
 
-        //access data directly
-        for (var i = 0; i < items.length; i++) {
-            if (items[i].type.indexOf("image") !== -1) {
-            //image
-            var blob = items[i].getAsFile();
-            var URLObj = window.URL || window.webkitURL;
-            var source = URLObj.createObjectURL(blob);
-            this.paste_createImage(source);
+            //access data directly
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf("image") !== -1) {
+                //image
+                var blob = items[i].getAsFile();
+                var URLObj = window.URL || window.webkitURL;
+                var source = URLObj.createObjectURL(blob);
+                this.paste_createImage(source);
+                }
             }
-        }
-        e.preventDefault();
+            e.preventDefault();
+
         }
     };
     //draw pasted image to svg
@@ -54,6 +70,7 @@ function CLIPBOARD_CLASS(autoresize) {
             if (resizer != null) {
                 resizer.remove();
             }
+            
             changePenAction("move");
 
         };
