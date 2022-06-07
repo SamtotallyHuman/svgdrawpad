@@ -168,6 +168,9 @@ function KeyPress(e) {
     var evtobj = window.event? event : e
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
         //counter--;
+
+        //TODO remove by counter number not by child order
+
         if (svg.lastChild == document.getElementById("resizer")) {
             svg.removeChild(svg.lastChild);
             svg.removeChild(svg.lastChild);

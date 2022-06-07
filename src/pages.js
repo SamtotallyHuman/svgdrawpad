@@ -86,3 +86,84 @@ function extendPage() {
     svgHeight = parseInt(svgHeight) + 540;
     svg.setAttribute("height", svgHeight);
 }
+
+const scale = 1/0.75;
+var currentPageNumber = 1;
+
+function uploadPDF() {
+
+    // User can select file
+    document.getElementById('file-input').click();
+
+    // When file is selected
+    document.getElementById('file-input').onchange = function() {
+        // Get file
+        var file = this.files[0];
+        var reader = new FileReader();
+        
+        // Check if file is pdf
+        if (file.type == "application/pdf") {
+
+            pageNumber = 1; 
+            pageContents = []; 
+            maxPage = 1; 
+            pageHeight = [];
+            svg.innerHTML = "";
+            currentPageNumber = 0;
+
+            // Read file
+            reader.readAsArrayBuffer(file);
+            // When file is read
+            reader.onload = function(event) {
+                var pdf = new Uint8Array(event.target.result);
+                var loadingTask = pdfjsLib.getDocument(pdf);
+                loadingTask.promise.then(function(pdf) {
+                    var numPages = pdf.numPages;
+                    for (var i = 1; i <= numPages; i++) {
+                        pdf.getPage(i).then(function(page) {
+                            
+                            var viewport = page.getViewport({scale: scale});
+                            // Converts the page to an image
+                            var canvas = document.createElement('canvas');
+                            var context = canvas.getContext('2d');
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
+                            var renderContext = {
+                                canvasContext: context,
+                                viewport: viewport
+                            };
+                            var renderTask = page.render(renderContext);
+                            renderTask.promise.then(function() {
+
+                                currentPageNumber++;
+                                var dataurl = canvas.toDataURL("image/png")
+                                var img = document.createElementNS('http://www.w3.org/2000/svg','image');
+                                img.setAttributeNS(null,'height',viewport.height);
+                                img.setAttributeNS(null,'width',viewport.width);
+                                img.setAttributeNS('http://www.w3.org/1999/xlink','href',dataurl);
+                                img.setAttributeNS(null,'draggable','false');
+                                img.setAttributeNS(null, 'style', 'pointer-events:none');
+                                img.setAttributeNS(null,'x','0');
+                                img.setAttributeNS(null,'y','0');
+                                img.setAttributeNS(null,'preserveAspectRatio','none');
+
+                                svg.setAttribute("height", viewport.height);
+                                svg.setAttribute("width", viewport.width);
+                                console.log(viewport.width)
+                                $('#svg').append(img);
+                                if (currentPageNumber < numPages) {
+                                    advancePage();
+                                } else {
+                                    updatePageContents();
+                                    pageNumber = 1;
+                                    updatePage();
+                                }
+                            });
+                            
+                        });
+                    }
+                });
+            }
+        }        
+    }
+}

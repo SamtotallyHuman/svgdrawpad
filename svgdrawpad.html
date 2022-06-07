@@ -22,10 +22,13 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js" integrity="sha512-dw+7hmxlGiOvY3mCnzrPT5yoUwN/MRjVgYV7HGXqsiXnZeqsw1H9n9lsnnPu4kL2nx2bnrjFcuWK+P3lshekwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
     
+    <input id="file-input" type="file" name="name" style="display: none;" />
+
     <nav class="no-border navbar navbar-inverse" onclick="forceStop()">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -86,9 +89,8 @@
                 <!-- Download Options -->
                 <li id="downloadlabel"><a title="Download Options" class="unselectable dropdown-toggle" data-toggle="dropdown"><span  class="glyphicon glyphicon-download-alt large"></span></a>
                     <ul class="dropdown-menu">
-                        <li id="pdflabel" onclick="downloadPDF()"><a title="Get PDF" class="unselectable verticle-centre"><span  class="glyphicon glyphicon-save"> - Get PDF</a></li>
-                        <li><a class="unselectable verticle-centre"><span class="glyphicon glyphicon-download"></span> - Download As Text</a></li>
-                        <li><a class="unselectable verticle-centre"><span class="glyphicon glyphicon-upload"></span> - Download Upload Text</a></li>
+                        <li id="pdflabel" onclick="downloadPDF()"><a title="Get PDF" class="unselectable verticle-centre"><span  class="glyphicon glyphicon-save"></span> - Get PDF</a></li>
+                        <li onclick="uploadPDF()"><a title="Upload PDF" class="unselectable verticle-centre"><span class="glyphicon glyphicon-open"></span> - Upload PDF</a></li>
                     </ul>
                 </li>
                 <!-- Extend Page-->
@@ -132,14 +134,13 @@
       </div>
 
     <div id="svgholder" class="displayDiv">
-        <div id="actionDiv">
-            <svg id="svg" height="20000" class="canvas unselectable">
-        </div>
-        </svg>
+        <div id="actionDiv" class="verticle-centre">
+            <svg id="svg" height="20000" class="canvas unselectable"></svg>
+        </div> 
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js" integrity="sha512-g4FwCPWM/fZB1Eie86ZwKjOP+yBIxSBM/b2gQAiSVqCgkyvZ0XxYPDEcN2qqaKKEvK6a05+IPL1raO96RrhYDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 <script>
@@ -182,6 +183,7 @@ function enableScroll() {
 }
 
 $(document).ready(function() {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.worker.min.js";
     let inputTextArea = document.getElementById("inputTextArea");
     inputTextArea.addEventListener("paste", function(e) {
         e.preventDefault();
