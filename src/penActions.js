@@ -80,7 +80,7 @@ function penStart() {
     if (fillShape) {
         fillStart();
     } else {
-        let polyline = "<polyline points='"+currX+","+currY+"' style='fill:none;stroke:"+colour+";stroke-width:"+pensize+"' id='"+counter+"'></polyline>";
+        let polyline = "<polyline class='createdObject' points='"+currX+","+currY+"' style='fill:none;stroke:"+colour+";stroke-width:"+pensize+"' id='"+counter+"'></polyline>";
         svg.innerHTML += polyline;
     }
 }
@@ -96,7 +96,7 @@ function penMove() {
 
 
 function fillStart() {
-    let polygon = "<polygon points='"+currX+","+currY+"' style='fill:"+colour+";stroke:"+colour+";stroke-width:"+pensize+"' id='"+counter+"'></polyline>";
+    let polygon = "<polygon class='createdObject' points='"+currX+","+currY+"' style='fill:"+colour+";stroke:"+colour+";stroke-width:"+pensize+"' id='"+counter+"'></polyline>";
     svg.innerHTML += polygon;
 }
 
@@ -107,7 +107,7 @@ function fillMove() {
 
 
 function lineStart() {
-    let polyline = "<polyline points='"+currX+","+currY+" "+currX+","+currY+"' style='fill:none;stroke:"+colour+";stroke-width:"+pensize+"' id='"+counter+"'></polyline>";
+    let polyline = "<polyline class='createdObject' points='"+currX+","+currY+" "+currX+","+currY+"' style='fill:none;stroke:"+colour+";stroke-width:"+pensize+"' id='"+counter+"'></polyline>";
     svg.innerHTML += polyline;
 }
 
@@ -153,7 +153,7 @@ function circleStart() {
     if (fillShape) {
         var circle = '<circle class="createdObject" id='+counter+' cx="'+currX+'" cy="'+currY+'" r="0" stroke="'+colour+'" stroke-width="'+pensize+'" fill="'+colour+'" />';
     } else {
-        var circle = '<circle id='+counter+' cx="'+currX+'" cy="'+currY+'" r="0" stroke="'+colour+'" stroke-width="'+pensize+'" fill="none" />';
+        var circle = '<circle class="createdObject" id='+counter+' cx="'+currX+'" cy="'+currY+'" r="0" stroke="'+colour+'" stroke-width="'+pensize+'" fill="none" />';
     }
     //et circle = '<circle id='+counter+' cx="'+currX+'" cy="'+currY+'" r="0" stroke="'+colour+'" stroke-width="'+pensize+'" fill="none" />';
     svg.innerHTML += circle;
@@ -250,9 +250,9 @@ function moveNoResizerMove() {
 function rectangleStart() {
     var rect = "";
     if (fillShape) {
-        var rect = "<rect id='"+counter+"' x='" + currX + "' y='" + currY + "' fill='" + colour + "' stroke='" + colour + "' stroke-width='" + pensize + "' />";
+        var rect = "<rect class='createdObject' id='"+counter+"' x='" + currX + "' y='" + currY + "' fill='" + colour + "' stroke='" + colour + "' stroke-width='" + pensize + "' />";
     } else {
-        var rect = "<rect id='"+counter+"' x='" + currX + "' y='" + currY + "' stroke='" + colour + "' stroke-width='" + pensize + "' fill='none'/>";
+        var rect = "<rect class='createdObject' id='"+counter+"' x='" + currX + "' y='" + currY + "' stroke='" + colour + "' stroke-width='" + pensize + "' fill='none'/>";
     }
     svg.innerHTML += rect;
 }

@@ -45,6 +45,7 @@ body {
 }
 .createdObject{
     touch-action: none;
+    pointer-events:none;
 }
 .noScroll {
     overflow: hidden;

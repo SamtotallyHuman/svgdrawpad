@@ -167,3 +167,57 @@ function uploadPDF() {
         }        
     }
 }
+
+function saveToText() {
+    updatePageContents();
+
+    var filename = "."
+
+    while (filename.includes(".")) {
+        filename = prompt("Please enter a filename", "")
+    }
+    filename += ".drw"
+
+    var json = {};
+    json.pageContents = pageContents;
+    json.pageHeight = pageHeight;
+    json.maxPage = maxPage;
+    json.pageNumber = pageNumber;
+    json.counter = counter;
+
+    var jsonString = JSON.stringify(json);
+
+    var a = document.createElement("a");
+    var file = new Blob([jsonString], {type: "text/plain;charset=utf-8"});
+    a.href = window.URL.createObjectURL(file);
+    a.download = filename;
+    a.click();
+    a.remove();
+}
+
+function loadFromText() {
+    // User can select file
+    document.getElementById('text-file-input').click();
+
+    // When file is selected
+    document.getElementById('text-file-input').onchange = function() {
+        // Get file
+        var file = this.files[0];
+        var reader = new FileReader();
+        
+        // Read file
+        reader.readAsText(file);
+        // When file is read
+        reader.onload = function(event) {
+            var jsonString = event.target.result;
+            var json = JSON.parse(jsonString);
+            pageContents = json.pageContents;
+            pageHeight = json.pageHeight;
+            maxPage = json.maxPage;
+            pageNumber = json.pageNumber;
+            counter = json.counter;
+            
+            updatePage();
+        }
+    }
+}

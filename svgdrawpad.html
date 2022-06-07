@@ -23,11 +23,13 @@
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js" integrity="sha512-dw+7hmxlGiOvY3mCnzrPT5yoUwN/MRjVgYV7HGXqsiXnZeqsw1H9n9lsnnPu4kL2nx2bnrjFcuWK+P3lshekwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 <body>
     
     <input id="file-input" type="file" name="name" style="display: none;" />
+    <input id="text-file-input" type="file" name="name" style="display: none;" />
 
     <nav class="no-border navbar navbar-inverse" onclick="forceStop()">
         <div class="container-fluid">
@@ -91,6 +93,9 @@
                     <ul class="dropdown-menu">
                         <li id="pdflabel" onclick="downloadPDF()"><a title="Get PDF" class="unselectable verticle-centre"><span  class="glyphicon glyphicon-save"></span> - Get PDF</a></li>
                         <li onclick="uploadPDF()"><a title="Upload PDF" class="unselectable verticle-centre"><span class="glyphicon glyphicon-open"></span> - Upload PDF</a></li>
+                        <!-- Saving and loading to text file-->
+                        <li onclick="saveToText()"><a title="Save Text" class="unselectable verticle-centre"><span class="glyphicon glyphicon-download"></span> - Save</a></li>
+                        <li onclick="loadFromText()"><a title="Load Text" class="unselectable verticle-centre"><span class="glyphicon glyphicon-upload"></span> - Load</a></li>
                     </ul>
                 </li>
                 <!-- Extend Page-->
