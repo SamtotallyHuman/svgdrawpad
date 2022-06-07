@@ -60,6 +60,7 @@ function CLIPBOARD_CLASS(autoresize) {
             img.setAttributeNS(null,'width',pastedImage.width);
             img.setAttributeNS(null,'id',counter);
             img.setAttributeNS('http://www.w3.org/1999/xlink','href',dataurl);
+            img.setAttributeNS(null,'draggable','false');
             img.setAttributeNS(null,'x','0');
             img.setAttributeNS(null,'y','0');
             img.setAttributeNS(null,'preserveAspectRatio','none');
@@ -77,6 +78,7 @@ function CLIPBOARD_CLASS(autoresize) {
         pastedImage.src = source;
     };
 }
+
 
 function changePenWidth() {
     pensize = document.getElementById("widthRange").value;

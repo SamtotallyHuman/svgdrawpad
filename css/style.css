@@ -121,3 +121,7 @@ body {
     white-space: normal;
     overflow: auto;
 }
+img, foreignObject {
+    touch-action: none;
+    pointer-events:none;
+}

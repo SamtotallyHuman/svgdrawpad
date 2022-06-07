@@ -125,8 +125,9 @@
       </div>
 
     <div id="svgholder" class="displayDiv">
-        <svg id="svg" height="20000" class="canvas unselectable">
-            
+        <div id="actionDiv">
+            <svg id="svg" height="20000" class="canvas unselectable">
+        </div>
         </svg>
     </div>
 
@@ -149,6 +150,7 @@ var flag = false; // Defines if the mouse is down or not
 var fillShape = false; // Defines if the shape should be filled or not
 var textSize = 20; // Defines the current text size
 
+const actionDiv = document.getElementById("actionDiv");
 const scrollableDiv = document.getElementById("svgholder");
 
 const displayTextDiv = document.getElementById("displayTextArea");
@@ -190,11 +192,13 @@ $(document).ready(function() {
     defaultHeight = $("#svgholder").height();
     changePenColour('#ffffff')
     var CLIPBOARD = new CLIPBOARD_CLASS(true);
-    svg.addEventListener("pointermove", function(e) {
+    actionDiv.addEventListener("pointermove", function(e) {
+        e.stopPropagation();
         e.preventDefault();
         findxy('move', e)
     }, false);
-    svg.addEventListener("pointerdown", function(e) {
+    actionDiv.addEventListener("pointerdown", function(e) {
+        e.stopPropagation();
         e.preventDefault();
         if (e.pointerType === "pen") {
             disableScroll();
@@ -205,7 +209,8 @@ $(document).ready(function() {
             findxy('down', e)
         }
     }, false);
-    svg.addEventListener("pointerup", function(e) {
+    actionDiv.addEventListener("pointerup", function(e) {
+        e.stopPropagation();
         resizeFlag = false;
         e.preventDefault();
         findxy('up', e)
@@ -213,12 +218,14 @@ $(document).ready(function() {
             enableScroll();
         } 
     }, false);
-    svg.addEventListener("touchend", function(e) {
+    actionDiv.addEventListener("touchend", function(e) {
+        e.stopPropagation();    
         e.preventDefault();
         findxy('up', e)
     }, false);
     // Enable scroll when pointer is not on the svg
-    svg.addEventListener("pointerleave", function(e) {
+    actionDiv.addEventListener("pointerleave", function(e) {
+        e.stopPropagation();
         enableScroll();
         if (penAction === "move" || penAction === "moveNoResizer") {
             findxy('up', e)

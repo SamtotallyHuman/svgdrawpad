@@ -33,6 +33,7 @@ function findxy(res, e) {
     }
     if (res == 'move') {
         if (flag) {
+
             prevX = currX;
             prevY = currY;
             currX = getX(e)
