@@ -61,6 +61,7 @@ function CLIPBOARD_CLASS(autoresize) {
             img.setAttributeNS(null,'id',counter);
             img.setAttributeNS('http://www.w3.org/1999/xlink','href',dataurl);
             img.setAttributeNS(null,'draggable','false');
+            img.setAttributeNS(null, 'style', 'pointer-events:none');
             img.setAttributeNS(null,'x','0');
             img.setAttributeNS(null,'y','0');
             img.setAttributeNS(null,'preserveAspectRatio','none');
