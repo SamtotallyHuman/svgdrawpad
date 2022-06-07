@@ -83,7 +83,14 @@
 
             <!-- Navbar right -->
             <ul class="nav navbar-nav navbar-right">
-                <li id="pdflabel" onclick="downloadPDF()"><a title="Get PDF" class="unselectable"><span  class="unselectable glyphicon glyphicon-save"></a></li>
+                <!-- Download Options -->
+                <li id="downloadlabel"><a title="Download Options" class="unselectable dropdown-toggle" data-toggle="dropdown"><span  class="glyphicon glyphicon-download-alt large"></span></a>
+                    <ul class="dropdown-menu">
+                        <li id="pdflabel" onclick="downloadPDF()"><a title="Get PDF" class="unselectable verticle-centre"><span  class="glyphicon glyphicon-save"> - Get PDF</a></li>
+                        <li><a class="unselectable verticle-centre"><span class="glyphicon glyphicon-download"></span> - Download As Text</a></li>
+                        <li><a class="unselectable verticle-centre"><span class="glyphicon glyphicon-upload"></span> - Download Upload Text</a></li>
+                    </ul>
+                </li>
                 <!-- Extend Page-->
                 <li id="extendPageLabel" onclick="extendPage()"><a title="Extend Page" class="unselectable"><span class="unselectable glyphicon glyphicon-triangle-bottom"></a></li>
                 <li><a id="pageNumber" class="unselectable">Page 1 of 1</a></li>
