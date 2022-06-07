@@ -167,17 +167,11 @@ function changePenAction(action) {
 function KeyPress(e) {
     var evtobj = window.event? event : e
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-        //counter--;
+        
+        counter--;
+        var lastItem = document.getElementById(counter);
+        lastItem.remove();
 
-        //TODO remove by counter number not by child order
-
-        if (svg.lastChild == document.getElementById("resizer")) {
-            svg.removeChild(svg.lastChild);
-            svg.removeChild(svg.lastChild);
-            changePenAction("pen");
-        } else {
-            svg.removeChild(svg.lastChild);
-        }
     }
 }
 

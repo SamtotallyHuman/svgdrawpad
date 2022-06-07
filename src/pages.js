@@ -196,6 +196,13 @@ function saveToText() {
 }
 
 function loadFromText() {
+
+    pageNumber = 1; 
+    pageContents = []; 
+    maxPage = 1; 
+    pageHeight = [];
+    svg.innerHTML = "";
+
     // User can select file
     document.getElementById('text-file-input').click();
 
