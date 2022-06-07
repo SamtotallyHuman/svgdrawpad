@@ -169,6 +169,9 @@ function KeyPress(e) {
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
         
         counter--;
+        if (counter < 0) {
+            counter = 0;
+        }
         var lastItem = document.getElementById(counter);
         lastItem.remove();
 
