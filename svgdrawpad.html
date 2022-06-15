@@ -34,7 +34,7 @@
     <nav class="no-border navbar navbar-inverse" onclick="forceStop()">
         <div class="container-fluid">
             <div class="navbar-header">
-            <a class="navbar-brand unselectable">DrawPad</a>
+            <a class="navbar-brand unselectable">SVGDrawpad</a>
             </div>
             <ul class="nav navbar-nav">
                 <li id="clearArealabel" onclick="clearArea()"><a title="Clear" class="unselectable"><span  class="unselectable glyphicon glyphicon-erase"></a></li>
@@ -78,7 +78,7 @@
                 <li id="changePenWidthLabel"><a title="Stroke Width" class="dropdown-toggle" data-toggle="dropdown"><span  class="glyphicon glyphicon-tint large unselectable" id="changepenWidthbutton">2</span></a>
                     <ul class="dropdown-menu">
                         <div class="slidecontainer">
-                            <input oninput="changePenWidth()" type="range" min="1" max="100" value="2" class="slider" id="widthRange">
+                            <input oninput="changePenWidth()" type="range" min="2" max="150" value="2" class="slider" id="widthRange">
                         </div>
                     </ul>
                 </li>
@@ -117,7 +117,7 @@
                     <button type="button" class="btn btn-default" style="float: right;" onclick="NewTab()">LaTeX Editor</button>   
                     &nbsp;&nbsp;<p style="float: right;" id="textSizeLabel">&nbsp;&nbsp; Size&nbsp;&nbsp;</p>&nbsp;&nbsp;
                     <div style="float: right;width:100px">
-                        <input oninput="changeLabelWidth()"  type="range" min="1" max="100" value="2" id="textwidthRange">
+                        <input oninput="changeLabelWidth()"  type="range" min="10" max="200" value="25" id="textwidthRange">
                     </div>    
                     <h4 class="modal-title">Enter Text</h4>
                 </div>
@@ -188,6 +188,7 @@ function enableScroll() {
 }
 
 $(document).ready(function() {
+    changeLabelWidth()
     pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.worker.min.js";
     let inputTextArea = document.getElementById("inputTextArea");
     inputTextArea.addEventListener("paste", function(e) {
@@ -203,7 +204,6 @@ $(document).ready(function() {
     //sets height of svg to div height
     svg.setAttribute("height", $("#svgholder").height());
     svg.setAttribute("width", $("#svgholder").width());
-    defaultHeight = $("#svgholder").height();
     changePenColour('#ffffff')
     var CLIPBOARD = new CLIPBOARD_CLASS(true);
     actionDiv.addEventListener("pointermove", function(e) {

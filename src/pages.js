@@ -46,7 +46,7 @@ function updatePage()
     }
     else
     {
-        svg.setAttribute("height", defaultHeight);
+        svg.setAttribute("height", $("#svgholder").height());
     }
 }
 
