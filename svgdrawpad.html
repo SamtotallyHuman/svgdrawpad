@@ -1,6 +1,6 @@
 <html> 
 <head>
-<title>DrawPad</title>
+<title>SVGDrawpad</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -23,6 +23,7 @@
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js" integrity="sha512-dw+7hmxlGiOvY3mCnzrPT5yoUwN/MRjVgYV7HGXqsiXnZeqsw1H9n9lsnnPu4kL2nx2bnrjFcuWK+P3lshekwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js" integrity="sha512-xcHCGC5tQ0SHlRX8Anbz6oy/OullASJkEhb4gjkneVpGE3/QGYejf14CUO5n5q5paiHfRFTa9HKgByxzidw2Bw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
@@ -92,7 +93,7 @@
                 <li id="downloadlabel"><a title="Download Options" class="unselectable dropdown-toggle" data-toggle="dropdown"><span  class="glyphicon glyphicon-download-alt large"></span></a>
                     <ul class="dropdown-menu">
                         <li id="pdflabel" onclick="downloadPDF()"><a title="Get PDF" class="unselectable verticle-centre"><span  class="glyphicon glyphicon-save"></span> - Get PDF</a></li>
-                        <li onclick="uploadPDF()"><a title="Upload PDF" class="unselectable verticle-centre"><span class="glyphicon glyphicon-open"></span> - Upload PDF</a></li>
+                        <li onclick="uploadFile()"><a title="Upload File" class="unselectable verticle-centre"><span class="glyphicon glyphicon-open"></span> - Upload File</a></li>
                         <!-- Saving and loading to text file-->
                         <li onclick="saveToText()"><a title="Save Text" class="unselectable verticle-centre"><span class="glyphicon glyphicon-download"></span> - Save</a></li>
                         <li onclick="loadFromText()"><a title="Load Text" class="unselectable verticle-centre"><span class="glyphicon glyphicon-upload"></span> - Load</a></li>

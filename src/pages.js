@@ -90,7 +90,7 @@ function extendPage() {
 const scale = 1/0.75;
 var currentPageNumber = 1;
 
-function uploadPDF() {
+function uploadFile() {
 
     // User can select file
     document.getElementById('file-input').click();
@@ -164,7 +164,58 @@ function uploadPDF() {
                     }
                 });
             }
-        }        
+        } else if (file.name.includes("notebook")) {
+            
+            pageNumber = 1; 
+            pageContents = []; 
+            maxPage = 1; 
+            pageHeight = [];
+            svg.innerHTML = "";
+
+            updatePage();
+
+            JSZip.loadAsync(file).then(function(content) {
+                
+                let buildArray = [];
+
+                content.forEach(function(path, file) {
+                    if (path.includes("page")) {
+                        var matches = path.match(/page(.*?).svg/);
+                        var str = matches && matches.length ? matches[1] : '';
+                        buildArray[str] = file.async("text");
+                    }
+                });
+
+                return Promise.all(buildArray);
+
+            }).then(function (buildArray) {
+
+                for (let i = 1; i < buildArray.length+1; i++) {
+                    var matches = buildArray[i-1].match(/<\/title>(.*?)<\/svg>/);
+                    var str = matches && matches.length ? matches[1] : '';
+                    svg.innerHTML = str;
+
+                    var matches = buildArray[i-1].match(/height="(.*?)"/);
+                    var str = matches && matches.length ? matches[1] : '';
+                    svg.setAttribute("height", str);
+
+                    var matches = buildArray[i-1].match(/width="(.*?)"/);
+                    var str = matches && matches.length ? matches[1] : '';
+                    svg.setAttribute("width", str);
+
+                    if (i < buildArray.length) {
+                        advancePage();
+                    } else {
+                        updatePageContents();
+                        pageNumber = 1;
+                        updatePage();
+                    }
+                }
+
+            });
+        } else {
+            alert("Unknown Filetype, it is a " + file.type);
+        }
     }
 }
 
