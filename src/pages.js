@@ -110,6 +110,7 @@ function uploadFile() {
             pageHeight = [];
             svg.innerHTML = "";
             currentPageNumber = 0;
+            updatePage();
 
             // Read file
             reader.readAsArrayBuffer(file);
@@ -191,9 +192,15 @@ function uploadFile() {
             }).then(function (buildArray) {
 
                 for (let i = 1; i < buildArray.length+1; i++) {
-                    var matches = buildArray[i-1].match(/<\/title>(.*?)<\/svg>/);
-                    var str = matches && matches.length ? matches[1] : '';
-                    svg.innerHTML = str;
+                    if (buildArray[i-1].includes("<\\title>")) {
+                        var matches = buildArray[i-1].match(/<\/title>(.*?)<\/svg>/);
+                        var str = matches && matches.length ? matches[1] : '';
+                    } else {
+                        var matches = buildArray[i-1].match(/(?<=<svg.*>)(.*)(?=<\/svg>)/);
+                        var str = matches && matches.length ? matches[1] : '';
+                    }
+                    
+                    svg.innerHTML = '<rect x="0" y="0" width="100%" height="100%" fill="#ffffff" st_id="6"/>' + str;
 
                     var matches = buildArray[i-1].match(/height="(.*?)"/);
                     var str = matches && matches.length ? matches[1] : '';
@@ -217,6 +224,78 @@ function uploadFile() {
             alert("Unknown Filetype, it is a " + file.type);
         }
     }
+}
+
+function downloadNotebook() {
+    updatePageContents();
+    pageNumber = 1;
+    updatePage();
+    let zip = new JSZip();
+
+    for (let i = 1; i < pageContents.length; i++) {
+        let string = "<svg width='" + svg.getAttribute("width") + "' height='" + svg.getAttribute("height") + "'>" + pageContents[i] + "</svg>";
+        zip.file("page" + i + ".svg", string);
+        if (i < pageContents.length-1) {
+            advancePage();
+        }
+    }
+
+    fetch('./notebookfiles/imsmanifest.xml')
+    .then(res => res.arrayBuffer())
+    .then(ab => {
+        console.log(ab);
+        zip.file("imsmanifest.xml", ab);
+    });
+
+    fetch('./notebookfiles/metadata.db')
+    .then(res => res.arrayBuffer())
+    .then(ab => {
+        console.log(ab);
+        zip.file("metadata.db", ab);
+    });
+
+    fetch('./notebookfiles/metadata.rdf')
+    .then(res => res.arrayBuffer())
+    .then(ab => {
+        console.log(ab);
+        zip.file("metadata.rdf", ab);
+    });
+
+    fetch('./notebookfiles/metadata.xml')
+    .then(res => res.arrayBuffer())
+    .then(ab => {
+        console.log(ab);
+        zip.file("metadata.xml", ab);
+    });
+
+    fetch('./notebookfiles/preview.png')
+    .then(res => res.arrayBuffer())
+    .then(ab => {
+        console.log(ab);
+        zip.file("preview.png", ab);
+    });
+
+    fetch('./notebookfiles/settings.xml')
+    .then(res => res.arrayBuffer())
+    .then(ab => {
+        console.log(ab);
+        zip.file("settings.xml", ab);
+    }).then(function() {
+
+    zip.generateAsync({type:"blob"}).then(function(content) {
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(content);
+        var filename = "."
+
+        while (filename.includes(".")) {
+            filename = prompt("Please enter a filename", "")
+        }
+        filename += ".notebook";
+        a.download = filename;
+        a.click();
+        a.remove();
+    });});
+
 }
 
 function saveToText() {

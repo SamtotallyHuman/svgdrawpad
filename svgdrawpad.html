@@ -46,6 +46,7 @@
                         <canvas id="colorCanvas" class="color-canvas bracket" width="250" height="250"></canvas>
                         <!-- Quick Colours-->
                         <button style="border: #000000;background: #ffffff;height: 15px;width: 15px;" onclick="changePenColour('#ffffff')"></button>
+                        <button style="border: #000000;background: #282828;height: 15px;width: 15px;" onclick="changePenColour('#282828')"></button>
                         <button style="border: #000000;background: #000000;height: 15px;width: 15px;" onclick="changePenColour('#000000')"></button>
                         <button style="border: #000000;background: #ff0000;height: 15px;width: 15px;" onclick="changePenColour('#ff0000')"></button>
                         <button style="border: #000000;background: #ffa500;height: 15px;width: 15px;" onclick="changePenColour('#ffa500')"></button>
@@ -55,7 +56,6 @@
                         <button style="border: #000000;background: #4b0082;height: 15px;width: 15px;" onclick="changePenColour('#4b0082')"></button>
                         <button style="border: #000000;background: #8a2be2;height: 15px;width: 15px;" onclick="changePenColour('#8a2be2')"></button>
                         <button style="border: #000000;background: #a52a2a;height: 15px;width: 15px;" onclick="changePenColour('#a52a2a')"></button>
-                        <button style="border: #000000;background: #deb887;height: 15px;width: 15px;" onclick="changePenColour('#deb887')"></button>
                         <button style="border: #000000;background: #5f9ea0;height: 15px;width: 15px;" onclick="changePenColour('#5f9ea0')"></button>
                         <button style="border: #000000;background: #7fff00;height: 15px;width: 15px;" onclick="changePenColour('#7fff00')"></button>
                     </div>
@@ -93,6 +93,7 @@
                 <li id="downloadlabel"><a title="Download Options" class="unselectable dropdown-toggle" data-toggle="dropdown"><span  class="glyphicon glyphicon-download-alt large"></span></a>
                     <ul class="dropdown-menu">
                         <li id="pdflabel" onclick="downloadPDF()"><a title="Get PDF" class="unselectable verticle-centre"><span  class="glyphicon glyphicon-save"></span> - Get PDF</a></li>
+                        <li id="pdflabel" onclick="downloadNotebook()"><a title="Get Notebook" class="unselectable verticle-centre"><span  class="glyphicon glyphicon-save"></span> - Get Notebook</a></li>
                         <li onclick="uploadFile()"><a title="Upload File" class="unselectable verticle-centre"><span class="glyphicon glyphicon-open"></span> - Upload File</a></li>
                         <!-- Saving and loading to text file-->
                         <li onclick="saveToText()"><a title="Save Text" class="unselectable verticle-centre"><span class="glyphicon glyphicon-download"></span> - Save</a></li>
@@ -140,7 +141,7 @@
       </div>
 
     <div id="svgholder" class="displayDiv">
-        <div id="actionDiv" class="verticle-centre">
+        <div id="actionDiv" class="verticle-centre horizontal-centre">
             <svg id="svg" height="20000" class="canvas unselectable"></svg>
         </div> 
     </div>
