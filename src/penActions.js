@@ -289,8 +289,9 @@ function textStart() {
 
     changePenAction("pen");
 }
+
 function addText() {
-    let foreignObject = "<foreignObject class='textObject' id='"+counter+"' width='10000' height='10000' x='0' y='0' style='color:"+colour+";font-size:"+(textSize)+";pointer-events:none;'>"+displayTextDiv.innerHTML.replace(/(?:\r\n|\r|\n)/g, "<br>")+"</foreignObject>" +
+    let foreignObject = "<foreignObject class='textObject' id='"+counter+"' width='1' height='1' x='0' y='0' style='color:"+colour+";font-size:"+(textSize)+";pointer-events:none;'>"+displayTextDiv.innerHTML.replace(/(?:\r\n|\r|\n)/g, "<br>")+"</foreignObject>" +
     counter++;
     svg.innerHTML += foreignObject;
     displayTextDiv.innerHTML = "";
