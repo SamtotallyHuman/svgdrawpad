@@ -36,8 +36,8 @@ function downloadPDF() {
     doc.end();
 }
 
-function updatePage()
-{
+function updatePage() {
+    storeDataToBS()
     document.getElementById("pageNumber").innerHTML = "Page " + pageNumber + " of " + maxPage;
     document.getElementById("svg").innerHTML = pageContents[pageNumber];
     if (pageHeight[pageNumber] != undefined)
@@ -357,4 +357,29 @@ function loadFromText() {
             updatePage();
         }
     }
+}
+
+function storeDataToBS() {
+    console.log("test")
+    var json = {};
+    json.pageContents = pageContents;
+    json.pageHeight = pageHeight;
+    json.maxPage = maxPage;
+    json.pageNumber = pageNumber;
+    json.counter = counter;
+
+    var jsonString = JSON.stringify(json);
+
+    localStorage.setItem('data', jsonString)
+}
+
+function getDataFromBS() {
+    let data = JSON.parse(localStorage.getItem('data'));
+    pageContents = data.pageContents;
+    pageHeight = data.pageHeight;
+    maxPage = data.maxPage;
+    pageNumber = data.pageNumber;
+    counter = data.counter;
+    
+    updatePage();
 }

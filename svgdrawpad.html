@@ -35,7 +35,10 @@
     <nav class="no-border navbar navbar-inverse" onclick="forceStop()">
         <div class="container-fluid">
             <div class="navbar-header">
-            <a class="navbar-brand unselectable">SVGDrawpad</a>
+            <a class="navbar-brand unselectable" data-toggle="dropdown">SVGDrawpad</a>
+                <ul class="dropdown-menu" style="background:#222222;color: white;">
+                    <li><div title="Recover From Browser Storage" onclick="getDataFromBS()"><span class="unselectable glyphicon glyphicon-repeat"></span> Recover</a></li>
+                </ul>
             </div>
             <ul class="nav navbar-nav">
                 <li id="clearArealabel" onclick="clearArea()"><a title="Clear" class="unselectable"><span  class="unselectable glyphicon glyphicon-erase"></a></li>
@@ -83,6 +86,10 @@
                         </div>
                     </ul>
                 </li>
+
+                <!-- undo-->
+                <li id="undoLabel" onclick="undo()"><a title="Undo" class="unselectable"><span class="unselectable glyphicon glyphicon-chevron-left"><span class="unselectable glyphicon glyphicon-remove"></span></a></li>
+
 
             </ul>
 
@@ -248,6 +255,16 @@ $(document).ready(function() {
         }
     }, false);
 });
+
+function undo() {
+    counter--;
+    if (counter < 0) {
+        counter = 0;
+        svg.innerHTML = ""
+    }
+    var lastItem = document.getElementById(counter);
+    lastItem.remove();
+}
 
 // Creates the colour picker
 function initColorPicker() {
