@@ -291,7 +291,7 @@ function textStart() {
 }
 
 function addText() {
-    let foreignObject = "<foreignObject class='textObject' id='"+counter+"' width='1' height='1' x='0' y='0' style='color:"+colour+";font-size:"+(textSize)+";pointer-events:none;'>"+displayTextDiv.innerHTML.replace(/(?:\r\n|\r|\n)/g, "<br>")+"</foreignObject>" +
+    let foreignObject = "<text class='textObject' id='"+counter+"' width='10000' height='10000' x='30' y='"+ (parseInt(scrollableDiv.scrollTop)+30) +"' style='fill:"+colour+";font-size:"+(textSize)+";pointer-events:none;'>"+displayTextDiv.innerHTML.replace(/(?:\r\n|\r|\n)/g, "<br>")+"</text>" +
     counter++;
     svg.innerHTML += foreignObject;
     displayTextDiv.innerHTML = "";

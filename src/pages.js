@@ -16,13 +16,13 @@ function downloadPDF() {
     // Loops through all svgs and adds them to a page
     for (let i = 1; i <= maxPage; i++) {
         pageNumber = i;
-        updatePage();
+        updatePageNoBKUP();
         doc.addPage({
             size: [0.75*$("#svg").width(),0.75*$("#svg").height()],
             margin: 0
         });
         doc.rect(0, 0, $("#svg").width(), $("#svg").height()).fill('#000000');
-        SVGtoPDF(doc, svg, 0, 0);
+        SVGtoPDF(doc, svg, 0, 0, {useCSS: false});
     }
 
     let stream = doc.pipe(blobStream());
@@ -34,6 +34,19 @@ function downloadPDF() {
       window.open(link.href);
     });
     doc.end();
+}
+
+function updatePageNoBKUP() {
+    document.getElementById("pageNumber").innerHTML = "Page " + pageNumber + " of " + maxPage;
+    document.getElementById("svg").innerHTML = pageContents[pageNumber];
+    if (pageHeight[pageNumber] != undefined)
+    {
+        svg.setAttribute("height", pageHeight[pageNumber]);
+    }
+    else
+    {
+        svg.setAttribute("height", $("#svgholder").height());
+    }
 }
 
 function updatePage() {
