@@ -93,6 +93,16 @@ function changeLabelWidth() {
 
 }
 
+function togglePenMode() {
+    PENMODEFLAG = !PENMODEFLAG
+
+    if (PENMODEFLAG) {
+        pendrawloaction.className = "unselectable glyphicon glyphicon-ok"
+    } else {
+        pendrawloaction.className = "unselectable glyphicon glyphicon-remove"
+    }
+}
+
 function changePenFill() {
     if (fillShape) {
         fillShape = false;

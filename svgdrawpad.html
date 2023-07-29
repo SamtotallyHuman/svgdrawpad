@@ -37,7 +37,8 @@
             <div class="navbar-header">
             <a class="navbar-brand unselectable" data-toggle="dropdown">SVGDrawpad</a>
                 <ul class="dropdown-menu" style="background:#222222;color: white;">
-                    <li><div title="Recover From Browser Storage" onclick="getDataFromBS()"><span class="unselectable glyphicon glyphicon-repeat"></span> Recover</a></li>
+                    <li><div title="Recover From Browser Storage" onclick="getDataFromBS()"><span class="unselectable glyphicon glyphicon-repeat"></span> Recover</div></li>
+                    <li><div title="Toggle Pen Mode" onclick="togglePenMode()">Pen Mode <span id="pendrawloaction" class="unselectable glyphicon glyphicon-remove"></span></div></li>
                 </ul>
             </div>
             <ul class="nav navbar-nav">
@@ -160,6 +161,9 @@
 <script>
 const svg = document.getElementById("svg");
 
+let PENMODEFLAG = true
+
+let pendrawloaction = document.getElementById("pendrawloaction")
 let penAction = "pen"; // defines the current pen action
 var counter = 0 // Defines the current item number
 var colour = "#ffffff"; // Defines the current colour
@@ -216,36 +220,42 @@ $(document).ready(function() {
     changePenColour('#ffffff')
     var CLIPBOARD = new CLIPBOARD_CLASS(true);
     actionDiv.addEventListener("pointermove", function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        findxy('move', e)
+        if (!PENMODEFLAG || e.pointerType === "pen") {
+            e.stopPropagation();
+            e.preventDefault();
+            findxy('move', e)
+        }
     }, false);
     actionDiv.addEventListener("pointerdown", function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        if (e.pointerType === "pen") {
-            disableScroll();
-        } else {
-            enableScroll();
-        }
-        if (e.button === 0) {
-            findxy('down', e)
+        if (!PENMODEFLAG || e.pointerType === "pen") {
+            e.stopPropagation();
+            e.preventDefault();
+            if (e.pointerType === "pen") {
+                disableScroll();
+            } else {
+                enableScroll();
+            }
+            if (e.button === 0) {
+                findxy('down', e)
+            }
         }
     }, false);
     actionDiv.addEventListener("pointerup", function(e) {
-        e.stopPropagation();
-        resizeFlag = false;
-        e.preventDefault();
-        findxy('up', e)
-        if (e.pointerType === "pen") {
-            enableScroll();
-        } 
+        if (!PENMODEFLAG || e.pointerType === "pen") {
+            e.stopPropagation();
+            resizeFlag = false;
+            e.preventDefault();
+            findxy('up', e)
+            if (e.pointerType === "pen") {
+                enableScroll();
+            }
+        }
     }, false);
-    actionDiv.addEventListener("touchend", function(e) {
+    /*actionDiv.addEventListener("touchend", function(e) {
         e.stopPropagation();    
         e.preventDefault();
         findxy('up', e)
-    }, false);
+    }, false);*/
     // Enable scroll when pointer is not on the svg
     actionDiv.addEventListener("pointerleave", function(e) {
         e.stopPropagation();
